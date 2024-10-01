@@ -1,0 +1,23 @@
+<section class="flex flex-col gap-2">
+  <div>
+    @for (comment of commentsForPosts(); track comment.post) {
+    <div class="comment p-4 rounded-md flex flex-col gap-3 border mb-3">
+      <div class="flex gap-3 items-center">
+        <img
+          [src]="comment.commentCreator.photo"
+          class="w-10 h-10 rounded-full"
+          alt=""
+        />
+
+        <h3 class="font-bold">{{ comment.commentCreator.name }}</h3>
+        <span class="font-light text-gray-400">{{
+          comment.createdAt | date
+        }}</span>
+      </div>
+      <p class="text-gray-600">
+        {{ comment.content }}
+      </p>
+    </div>
+    }
+  </div>
+</section>

@@ -1,0 +1,169 @@
+<main class="lg:w-1/3 mx-auto my-8 flex flex-col gap-4">
+  <div class="bg-white p-3 rounded-md">
+    <input
+      data-modal-target="authentication-modal"
+      data-modal-toggle="authentication-modal"
+      type="text"
+      id="default-input"
+      placeholder="What's in your mind?"
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+    />
+  </div>
+
+  <!-- Main modal -->
+  <div
+    id="authentication-modal"
+    tabindex="-1"
+    aria-hidden="true"
+    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
+  >
+    <div class="relative p-5 w-full max-w-[45rem] max-h-full">
+      <!-- Modal content -->
+      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <!-- Modal header -->
+        <div
+          class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600"
+        >
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+            Add New Post
+          </h3>
+          <button
+            type="button"
+            class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+            data-modal-hide="authentication-modal"
+          >
+            <svg
+              class="w-3 h-3"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 14 14"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+              />
+            </svg>
+            <span class="sr-only">Close modal</span>
+          </button>
+        </div>
+        <!-- Modal body -->
+        <div class="p-4 md:p-5">
+          <form class="space-y-4" action="#">
+            <div>
+              <textarea
+                name="content"
+                id="content"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                placeholder="Write your thought here"
+                required
+              ></textarea>
+            </div>
+
+            <div class="flex items-center justify-center w-full">
+              <label
+                for="dropzone-file"
+                class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+              >
+                <div
+                  class="flex flex-col items-center justify-center pt-5 pb-6"
+                >
+                  <svg
+                    class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 20 16"
+                  >
+                    <path
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                    />
+                  </svg>
+                  <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                    <span class="font-semibold">Click to upload</span> or drag
+                    and drop
+                  </p>
+                  <p class="text-xs text-gray-500 dark:text-gray-400">
+                    SVG, PNG, JPG or GIF (MAX. 800x400px)
+                  </p>
+                </div>
+                <input
+                  (change)="changeImg($event)"
+                  id="dropzone-file"
+                  type="file"
+                  class="hidden"
+                  multiple
+                  accept="image/*"
+                />
+              </label>
+            </div>
+
+            <button
+              type="submit"
+              class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+              Post
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <img [src]="imgInput" alt="" />
+
+  @for (post of postList; track post.id) { @if (post.body || post.image) {
+  <article class="bg-white p-3 rounded-md flex flex-col gap-4">
+    <div class="flex items-center gap-3">
+      <img
+        [src]="post.user.photo"
+        class="w-10 h-10 rounded-full"
+        alt="profile img"
+      />
+      <div>
+        <h3 class="font-bold">{{ post.user.name }}</h3>
+        <span class="font-light text-gray-400">
+          {{ post.createdAt | date }}</span
+        >
+      </div>
+    </div>
+
+    <p>
+      {{ post.body }}
+    </p>
+
+    <img [src]="post.image" class="w-full rounded-md" alt="" />
+
+    <div class="flex justify-around">
+      <span>{{ post.comments.length }} Comments</span>
+      <button class="text-blue-700 flex" (click)="getPost(post.id)">
+        Show Comment @if (load == post.id) {
+        <span class="loader ms-4"></span>
+        }
+      </button>
+    </div>
+    <app-input-comment
+      [idPost]="post.id"
+      class="comment rounded"
+    ></app-input-comment>
+  </article>
+  } } @empty {
+  <div class="grid place-content-center h-screen">
+    <span class="load"></span>
+  </div>
+  }
+</main>
+@if (post.id == id) {
+<app-show-comments
+  [post]="post"
+  [closeCheck]="showComments"
+  (x)="showComments = $event"
+></app-show-comments>
+}

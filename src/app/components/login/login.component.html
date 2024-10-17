@@ -1,0 +1,51 @@
+<section class="bg-main">
+  <h1 class="text-main text-center my-5">Linked Posts</h1>
+  <div class="lg:w-1/2 md:w-3/4 mx-auto bg-white p-4 rounded">
+    <h2 class="text-main">Login Now</h2>
+
+    <form class="my-3" [formGroup]="loginForm" (ngSubmit)="login()">
+      <div class="mb-6">
+        <input
+          formControlName="email"
+          type="email"
+          id="email"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="Type your email ....."
+        />
+        @if (loginForm.get('email')?.errors && loginForm.get('email')?.touched)
+        { @if (loginForm.get('email')?.getError('required')) {
+        <p class="text-red-700 mt-2">* Email is required</p>
+        } @else if (loginForm.get('email')?.getError('email')) {
+        <p class="text-red-700 mt-2">* Enter valid email</p>
+        } }
+      </div>
+      <div class="mb-6">
+        <input
+          formControlName="password"
+          type="password"
+          id="password"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="Type your password"
+        />
+      </div>
+      <button
+        [disabled]="loginForm.invalid || loadingBtn"
+        type="submit"
+        class="text-white bg-blue-800 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+      >
+        Signin @if (loadingBtn) {
+        <i class="fa fa-spin fa-spinner ms-1"></i>
+        }
+      </button>
+      <p class="mt-2">
+        <span class="text-gray-400">Not registered? </span>
+        <span class="text-main cr font-semibold" routerLink="/signup">
+          Create account</span
+        >
+      </p>
+    </form>
+    @if (errorMsg) {
+    <p class="text-red-700 text-center">* incorrect email or password</p>
+    }
+  </div>
+</section>

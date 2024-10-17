@@ -1,5 +1,5 @@
 import { Component, EventEmitter, inject, Input, Output, Renderer2 } from '@angular/core';
-import { IPosts } from '../../interfaces/Ipost';
+import { IPosts } from '../../core/interfaces/Ipost';
 import { DatePipe} from '@angular/common';
 import { CommentsComponent } from "../../shared/ui/comments/comments.component";
 import { InputCommentComponent } from "../input-comment/input-comment.component";

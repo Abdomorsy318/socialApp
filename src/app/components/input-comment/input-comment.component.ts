@@ -1,7 +1,7 @@
 import { Component, inject, Input } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { CommentsService } from '../../core/services/comments.service';
-import { Icomments } from '../../interfaces/icomments';
+import { Icomments } from '../../core/interfaces/icomments';
 import { NgClass } from '@angular/common';
 
 @Component({

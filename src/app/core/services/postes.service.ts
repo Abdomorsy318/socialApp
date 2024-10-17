@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from '../../environment/environments';
+import { environment } from '../environment/environments';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class PostesService {
     return this._HttpClient.post(`${environment.baseUrl}posts` , data)
   }
   getAllePosts():Observable<any>{
-    return this._HttpClient.get(`${environment.baseUrl}posts?limit=50`)
+    return this._HttpClient.get(`${environment.baseUrl}posts?limit=100`)
   }
   getMyePosts():Observable<any>{
     return this._HttpClient.get(`${environment.baseUrl}users/664bcf3e33da217c4af21f00/posts?limit=2`)

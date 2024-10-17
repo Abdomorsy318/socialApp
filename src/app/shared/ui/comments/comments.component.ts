@@ -1,6 +1,6 @@
 import { Component, inject, Input, OnInit, computed, Signal } from '@angular/core';
 import { CommentsService } from '../../../core/services/comments.service';
-import { Icomments } from '../../../interfaces/icomments';
+import { Icomments } from '../../../core/interfaces/icomments';
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -19,7 +19,7 @@ export class CommentsComponent implements OnInit{
       this._CommentsService.getPostComments(this.postId).subscribe({
         next:(res)=>{
           this._CommentsService.commentsForPost.set(res.comments)
-          this.commentsForPosts = computed(()=>this._CommentsService.commentsForPost().reverse())
+          this.commentsForPosts = computed(()=>this._CommentsService.commentsForPost())
         },
       error:(err)=>{
         console.log(err)

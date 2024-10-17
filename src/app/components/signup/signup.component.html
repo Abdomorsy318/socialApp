@@ -1,0 +1,125 @@
+<section class="bg-main">
+  <h1 class="text-main text-center my-5">Linked Posts</h1>
+  <div class="lg:w-1/2 md:w-3/4 mx-auto bg-white p-4 rounded">
+    <h2 class="text-main">Register Now</h2>
+
+    <form class="my-3" [formGroup]="signUpForm" (ngSubmit)="signup()">
+      <div class="mb-6">
+        <input
+          formControlName="name"
+          type="text"
+          id="first_name"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="Type your name ....."
+          required
+        />
+        @if (signUpForm.get('name')?.errors && signUpForm.get('name')?.touched){
+        @if (signUpForm.get('name')?.getError('required')) {
+        <p class="text-red-700 mt-2">* Name is required</p>
+        } @else if (signUpForm.get('name')?.getError('minlength')) {
+        <p class="text-red-700 mt-2">
+          * length must be at least 2 characters long
+        </p>
+        } }
+      </div>
+      <div class="mb-6">
+        <input
+          formControlName="email"
+          type="email"
+          id="email"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="Type your email ....."
+          required
+        />
+        @if (signUpForm.get('email')?.errors &&
+        signUpForm.get('email')?.touched) { @if
+        (signUpForm.get('email')?.getError('required')) {
+        <p class="text-red-700 mt-2">* Email is required</p>
+        } @else if (signUpForm.get('email')?.getError('email')) {
+        <p class="text-red-700 mt-2">* Enter valid email</p>
+        } }
+      </div>
+      <div class="mb-6">
+        <input
+          formControlName="password"
+          type="password"
+          id="password"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="Type your password"
+          required
+        />
+        @if (signUpForm.get('password')?.errors &&
+        signUpForm.get('password')?.touched) { @if
+        (signUpForm.get('password')?.getError('required')) {
+        <p class="text-red-700 mt-2">* password is required</p>
+        } @else if (signUpForm.get('password')?.getError('pattern')) {
+        <p class="text-red-700 mt-2">
+          - At least 8 characters long <br />
+          - At least 1 capital letter<br />
+          - At least 1 lowercase letter<br />
+          - At least 1 special character<br />
+          - At least 1 numeric character<br />
+        </p>
+        } }
+      </div>
+      <div class="mb-6">
+        <input
+          formControlName="rePassword"
+          type="password"
+          id="confirm_password"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="confirm password"
+          required
+        />
+        @if ((signUpForm.getError('mismatch')
+        ||signUpForm.get('rePassword')?.errors) &&
+        signUpForm.get('rePassword')?.touched) { @if
+        (signUpForm.get('rePassword')?.getError('required')) {
+        <p class="text-red-700 mt-2">* confirm password is required</p>
+        } @else if (signUpForm.getError('mismatch')) {
+        <p class="text-red-700 mt-2">* password confirmation is incorrect</p>
+        } }
+      </div>
+
+      <div class="mb-6">
+        <input
+          formControlName="dateOfBirth"
+          type="date"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="Select date"
+        />
+
+        @if (signUpForm.get('dateOfBirth')?.errors &&
+        signUpForm.get('dateOfBirth')?.touched) { @if
+        (signUpForm.get('dateOfBirth')?.getError('required')) {
+        <p class="text-red-700 mt-2">* Date Of Birth is required</p>
+        } @else if (signUpForm.get('dateOfBirth')?.getError('pattern')) {
+        <p class="text-red-700 mt-2">* Enter valid date</p>
+        } }
+      </div>
+      <div class="mb-6">
+        <input id="male" type="radio" value="male" formControlName="gender" />
+        <label for="male" class="me-3"> Male</label>
+        <input
+          id="female"
+          type="radio"
+          value="female"
+          formControlName="gender"
+        />
+        <label for="female"> Female</label>
+      </div>
+      <button
+        [disabled]="signUpForm.invalid || loadingBtn"
+        type="submit"
+        class="text-white bg-blue-800 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+      >
+        Signup @if (loadingBtn) {
+        <i class="fa fa-spin fa-spinner ms-1"></i>
+        }
+      </button>
+    </form>
+    @if (errorMsg) {
+    <p class="text-red-700 text-center">* {{ errorMsg }}</p>
+    }
+  </div>
+</section>

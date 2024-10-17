@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, signal, WritableSignal } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from '../../environment/environments';
-import { Icomments } from '../../interfaces/icomments';
+import { environment } from '../environment/environments';
+import { Icomments } from '../interfaces/icomments';
 
 @Injectable({
   providedIn: 'root'

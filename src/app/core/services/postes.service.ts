@@ -16,8 +16,8 @@ export class PostesService {
   getAllePosts():Observable<any>{
     return this._HttpClient.get(`${environment.baseUrl}posts?limit=100`)
   }
-  getMyePosts():Observable<any>{
-    return this._HttpClient.get(`${environment.baseUrl}users/664bcf3e33da217c4af21f00/posts?limit=2`)
+  getMyPosts():Observable<any>{
+    return this._HttpClient.get(`${environment.baseUrl}users/664bcf3e33da217c4af21f00/posts`)
   }
   getSinglPost(postId:string):Observable<any>{
     return this._HttpClient.get(`${environment.baseUrl}posts/${postId}`)

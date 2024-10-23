@@ -17,6 +17,7 @@ declare var $:any;
 })
 export class TimelineComponent implements OnInit{
   postList:IPosts[]=[] 
+  postListAll:IPosts[]=[] 
   private readonly _PostesService = inject(PostesService)
   private readonly _Renderer2 = inject(Renderer2)
   showComments!:boolean
@@ -30,7 +31,16 @@ export class TimelineComponent implements OnInit{
   ngOnInit(): void {
     this._PostesService.getAllePosts().subscribe({
       next:(res)=>{
-        this.postList = res.posts
+        this.postListAll = res.posts.sort(() => Math.random() - 0.5);
+        this._PostesService.getMyPosts().subscribe({
+          next:(res)=>{
+            this.postList = (res.posts.concat(this.postListAll)).sort(() => Math.random() - 0.5);
+            console.log([res.posts[res.posts.length - 1]])
+          },
+          error:(err)=>{
+            console.log(err)
+          }
+        })
         console.log(res.posts)
       },
       error:(err)=>{
@@ -73,15 +83,24 @@ export class TimelineComponent implements OnInit{
   }
   creatPost():void{
     const formData = new FormData();
-    formData.append('body' , this.content);
-    formData.append('image' , this.imgFile);
+    if(this.content)
+      formData.append('body' , this.content);
+    if(this.imgFile)
+      formData.append('image' , this.imgFile);
     this._PostesService.createPost(formData).subscribe({
       next:(res)=>{
         console.log(res)
         this.img = '';
         this.content = '';
-        // $('#authentication-modal').modal('hide');
-        this._PostesService.getAllePosts()
+        this._PostesService.getMyPosts().subscribe({
+          next:(res)=>{
+            this.postList = [res.posts[res.posts.length - 1]].concat(this.postList)
+            console.log([res.posts[res.posts.length - 1]])
+          },
+          error:(err)=>{
+            console.log(err)
+          }
+        })
       },
       error:(err)=>{
         console.log(err)

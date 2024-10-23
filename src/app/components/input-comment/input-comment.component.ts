@@ -32,6 +32,7 @@ export class InputCommentComponent {
           this._CommentsService.commentsForPost.set(res.comments)
           this.commentForm.get('content')?.reset()
           this.load = false
+          console.log(res.comments.length)
         },
         error:(err)=>{
           console.log(err)

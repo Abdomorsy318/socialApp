@@ -9,7 +9,7 @@ export const blankGuardGuard: CanActivateFn = (route, state) => {
   if(isPlatformBrowser(_PLATFORM_ID)){
     if(localStorage.getItem('socialToken') !== null)
     {
-      _Router.navigate(['/timeline']);
+      _Router.navigate(['/timeLine']);
       return false;
     }
     else

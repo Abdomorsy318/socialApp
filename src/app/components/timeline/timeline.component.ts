@@ -28,6 +28,7 @@ export class TimelineComponent implements OnInit{
   content:string = ''
   msg:string = ''
   imgFile!:File
+  loadPosts:boolean = false;
   ngOnInit(): void {
     this._PostesService.getAllePosts().subscribe({
       next:(res)=>{
@@ -82,6 +83,7 @@ export class TimelineComponent implements OnInit{
     this.img = ''
   }
   creatPost():void{
+    this.loadPosts = true;
     const formData = new FormData();
     if(this.content)
       formData.append('body' , this.content);
@@ -94,15 +96,18 @@ export class TimelineComponent implements OnInit{
         this.content = '';
         this._PostesService.getMyPosts().subscribe({
           next:(res)=>{
+            this.loadPosts = false;
             this.postList = [res.posts[res.posts.length - 1]].concat(this.postList)
             console.log([res.posts[res.posts.length - 1]])
           },
           error:(err)=>{
+            this.loadPosts = false;
             console.log(err)
           }
         })
       },
       error:(err)=>{
+        this.loadPosts = false;
         console.log(err)
       }
     })

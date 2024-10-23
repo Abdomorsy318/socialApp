@@ -34,13 +34,8 @@ export class TimelineComponent implements OnInit{
         this.postListAll = res.posts.sort(() => Math.random() - 0.5);
         this._PostesService.getMyPosts().subscribe({
           next:(res)=>{
-            if(res.posts[res.posts.length - 1] !== undefined)
-              this.postList = (res.posts.concat(this.postListAll)).sort(() => Math.random() - 0.5);
-              
-            else
-              {
-                this.postList = this.postListAll
-            console.log(res.posts[res.posts.length - 1])}
+            this.postList = (res.posts.concat(this.postListAll)).sort(() => Math.random() - 0.5);
+            console.log([res.posts[res.posts.length - 1]])
           },
           error:(err)=>{
             console.log(err)

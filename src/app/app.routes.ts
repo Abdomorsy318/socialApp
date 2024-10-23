@@ -10,6 +10,7 @@ export const routes: Routes = [
     {path:"" , redirectTo:"login" , pathMatch:'full'},
     {path:"signup" , component:SignupComponent , canActivate:[blankGuardGuard] , title:'SignUp'},
     {path:"login" , component:LoginComponent , canActivate:[blankGuardGuard]  , title:'Login'},
-    // {path:"timeLine" , component:TimelineComponent, canActivate:[authGaurdGuard]  , title:'TimeLine'},
-    {path:'timeLine' , component:TimelineComponent , title:'NotFound'}
+    {path:"timeLine" , component:TimelineComponent, canActivate:[authGaurdGuard]  , title:'TimeLine'},
+    {path:"timeline" , component:TimelineComponent, canActivate:[authGaurdGuard]  , title:'TimeLine'},
+    {path:'**' , component:NotfoundComponent , title:'NotFound'}
 ];

@@ -7,7 +7,7 @@ import { blankGuardGuard } from './core/blank-guard.guard';
 
 export const routes: Routes = [
     {path:"" , redirectTo:"login" , pathMatch:'full'},
+    {path:"timeLine" , component:TimelineComponent, canActivate:[authGaurdGuard]  , title:'TimeLine'},
     {path:"signup" , component:SignupComponent , canActivate:[blankGuardGuard] , title:'SignUp'},
-    {path:"login" , component:LoginComponent , canActivate:[blankGuardGuard]  , title:'Login'},
-    {path:"timeLine" , component:TimelineComponent, canActivate:[authGaurdGuard]  , title:'TimeLine'}
+    {path:"login" , component:LoginComponent , canActivate:[blankGuardGuard]  , title:'Login'}
 ];

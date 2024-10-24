@@ -8,7 +8,7 @@ import { Icomments } from '../interfaces/icomments';
   providedIn: 'root'
 })
 export class CommentsService {
-
+numOfComments:WritableSignal<number> = signal(0);
   constructor(private _HttpClient:HttpClient) { }
   commentsForPost:WritableSignal<Icomments[]> = signal([])
   createComment(data:object):Observable<any>{

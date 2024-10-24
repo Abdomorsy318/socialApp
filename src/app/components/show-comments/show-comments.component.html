@@ -37,7 +37,13 @@
           {{ post.body }}
         </p>
         <img [src]="post.image" class="w-full rounded-md" alt="" />
-        <span class="text-black">{{ post.comments.length }} Comment</span>
+        <span class="text-black"
+          >@if (_CommentsService.numOfComments() != 0) {
+          {{ _CommentsService.numOfComments() }}
+          } @else {
+          {{ post.comments.length }}
+          } Comment</span
+        >
         <app-comments [postId]="post.id"></app-comments>
       </div>
     </div>

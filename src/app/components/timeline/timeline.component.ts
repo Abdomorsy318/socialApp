@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, Renderer2 } from '@angular/core';
+import { Component, inject, OnInit, Renderer2, WritableSignal } from '@angular/core';
 import { PostesService } from '../../core/services/postes.service';
 import { IPosts } from '../../core/interfaces/Ipost';
 import { DatePipe, NgClass } from '@angular/common';
@@ -7,7 +7,7 @@ import { ShowCommentsComponent } from "../show-comments/show-comments.component"
 import { InputCommentComponent } from "../input-comment/input-comment.component";
 import { FormsModule } from '@angular/forms';
 import { NavBlankComponent } from "../nav-blank/nav-blank.component";
-declare var $:any;
+import { CommentsService } from '../../core/services/comments.service';
 @Component({
   selector: 'app-timeline',
   standalone: true,
@@ -19,6 +19,7 @@ export class TimelineComponent implements OnInit{
   postList:IPosts[]=[] 
   postListAll:IPosts[]=[] 
   private readonly _PostesService = inject(PostesService)
+  _CommentsService = inject(CommentsService)
   private readonly _Renderer2 = inject(Renderer2)
   showComments!:boolean
   load!:string
@@ -42,7 +43,7 @@ export class TimelineComponent implements OnInit{
             console.log(err)
           }
         })
-        console.log(res.posts)
+        console.log(this.postListAll)
       },
       error:(err)=>{
         console.log(err)

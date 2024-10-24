@@ -3,6 +3,7 @@ import { FormGroup, FormControl, ReactiveFormsModule, FormBuilder, Validators } 
 import { CommentsService } from '../../core/services/comments.service';
 import { Icomments } from '../../core/interfaces/icomments';
 import { NgClass } from '@angular/common';
+import { PostesService } from '../../core/services/postes.service';
 
 @Component({
   selector: 'app-input-comment',
@@ -14,6 +15,7 @@ import { NgClass } from '@angular/common';
 export class InputCommentComponent {
   private readonly _FormBuilder = inject(FormBuilder)
   private readonly _CommentsService = inject(CommentsService)
+  private readonly _PostesService = inject(PostesService)
   @Input({required:true}) idPost!:string
   commentForm!:FormGroup 
   load!:boolean
@@ -32,7 +34,8 @@ export class InputCommentComponent {
           this._CommentsService.commentsForPost.set(res.comments)
           this.commentForm.get('content')?.reset()
           this.load = false
-          console.log(res.comments.length)
+          this._CommentsService.numOfComments.set(res.comments.length)
+          console.log(this._CommentsService.numOfComments())
         },
         error:(err)=>{
           console.log(err)

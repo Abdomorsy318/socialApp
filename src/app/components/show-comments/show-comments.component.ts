@@ -3,6 +3,7 @@ import { IPosts } from '../../core/interfaces/Ipost';
 import { DatePipe} from '@angular/common';
 import { CommentsComponent } from "../../shared/ui/comments/comments.component";
 import { InputCommentComponent } from "../input-comment/input-comment.component";
+import { CommentsService } from '../../core/services/comments.service';
 
 @Component({
   selector: 'app-show-comments',
@@ -14,6 +15,7 @@ import { InputCommentComponent } from "../input-comment/input-comment.component"
 export class ShowCommentsComponent {
 
   private readonly _Renderer2 = inject(Renderer2)
+   _CommentsService = inject(CommentsService)
   @Input({required:true}) post!:IPosts
   @Input({required:true}) closeCheck!:boolean
   @Output() x:EventEmitter<boolean> = new EventEmitter()

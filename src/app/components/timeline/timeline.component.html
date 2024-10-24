@@ -162,8 +162,7 @@
       <img [src]="post.image" class="w-full rounded-md" alt="" />
 
       <div class="flex justify-around">
-        <span>{{ post.comments.length }} Comments</span>
-        <button class="text-blue-700 flex" (click)="getPost(post.id)">
+        <button class="text-blue-700" (click)="getPost(post.id)">
           Show Comment @if (load == post.id) {
           <span class="loader ms-4"></span>
           }

@@ -24,6 +24,7 @@ export class InputCommentComponent {
       content:[null , [Validators.required , Validators.minLength(2)]],
       post:[this.idPost]
     })
+    this._CommentsService.numOfComments.set(0)
   }
   sendComment():void{
     this.load = true
